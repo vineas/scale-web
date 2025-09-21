@@ -22,15 +22,19 @@ Proyek ini adalah aplikasi **Web Scale** yang dibangun menggunakan **React + Vit
    cd web-scale
 
 2. Install dependencies
+   ```bash
    npm install
 
 3. Buat file .env dan isi dengan credentials Supabase
+   ```bash
     VITE_SUPABASE_URL=your-supabase-url
     VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
 
 4. Jalankan development server
+   ```bash
     npm run dev
 
 5. Buka di browser
+   ```bash
     http://localhost:5173
     

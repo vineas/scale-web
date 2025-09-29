@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import {
-  //   FaBars,
   FaWeight,
   FaBox,
   FaTruck,
@@ -37,7 +36,7 @@ export const SidebarComponent = () => {
         className="mt-12"
       >
         <SubMenu icon={<FaWeight />} label="Penimbangan">
-          <MenuItem icon={<FaWeight />} component={<Link to="/penimbangan" />}>
+          <MenuItem icon={<FaWeight />} component={<Link to="/" />}>
             Penimbangan I
           </MenuItem>
           <MenuItem
@@ -78,7 +77,7 @@ export const SidebarComponent = () => {
         <SubMenu icon={<FaChartBar />} label="Laporan">
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/harian" />}
+            component={<Link to="/laporan-harian" />}
           >
             Harian
           </MenuItem>

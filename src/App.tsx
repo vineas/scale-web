@@ -9,28 +9,46 @@ import { MasterProductsPage } from "./Pages/MasterProducts";
 import { TransporterPage } from "./Pages/Transporter";
 import TimbangMasuk from "./Pages/TimbangMasuk";
 import TimbangKeluar from "./Pages/TimbangKeluar";
+import { LaporanHarian } from "./Pages/Laporan/harian";
+import { TicketTimbangan } from "./Pages/PrintPage/ticket";
 
 function App() {
-  
   return (
     <>
       <Router>
-          <HeaderComponent />
-        <div className="flex h-screen ">
-          <SidebarComponent />
-          <main className="p-4 pt-15 overflow-y-scroll bg-gray-300">
-            <Routes>
-              <Route path="/" element={<PenimbanganPage />} />
-              <Route path="/penimbangan" element={<PenimbanganPage />} />
-              <Route path="/penimbangan-dua" element={<PenimbanganDuaPage />} />
-              <Route path="/barang" element={<MasterProductsPage />} />
-              <Route path="/supplier-customer" element={<CustomerPage />} />
-              <Route path="/transporter" element={<TransporterPage />} />
-              <Route path="/timbang-masuk" element={<TimbangMasuk />} />
-              <Route path="/timbang-keluar" element={<TimbangKeluar />} />
-            </Routes>
-          </main>
-        </div>
+        <Routes>
+          {/* Layout dengan sidebar */}
+          <Route
+            path="/*"
+            element={
+              <div className="flex h-screen">
+                <HeaderComponent />
+                <SidebarComponent />
+                <main className="p-4 pt-15 overflow-y-scroll bg-gray-300">
+                  <Routes>
+                    <Route path="/" element={<PenimbanganPage />} />
+                    <Route
+                      path="/penimbangan-dua"
+                      element={<PenimbanganDuaPage />}
+                    />
+                    <Route path="/barang" element={<MasterProductsPage />} />
+                    <Route
+                      path="/supplier-customer"
+                      element={<CustomerPage />}
+                    />
+                    <Route path="/transporter" element={<TransporterPage />} />
+                    <Route path="/timbang-masuk" element={<TimbangMasuk />} />
+                    <Route path="/timbang-keluar" element={<TimbangKeluar />} />
+                    <Route path="/laporan-harian" element={<LaporanHarian />} />
+                  </Routes>
+                </main>
+              </div>
+            }
+          />
+
+          {/* Route khusus tanpa sidebar */}
+          <Route path="/ticket-timbangan/:id" element={<TicketTimbangan />} />
+        </Routes>
       </Router>
     </>
   );

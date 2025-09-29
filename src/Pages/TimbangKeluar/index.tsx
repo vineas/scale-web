@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import supabase from "../../lib/db";
 import type { Penimbangan } from "../../types";
+import { FaPrint } from "react-icons/fa";
+// import { Link } from "react-router-dom";
 
 export default function TimbangKeluar() {
   // Get data supplier/customer from supabase
@@ -10,7 +12,7 @@ export default function TimbangKeluar() {
       const { data, error } = await supabase
         .from("penimbangan")
         .select(
-          `id, no_record, nama_operator, nama_sopir,  no_kendaraan, berat_timbang_keluar, waktu_timbang_keluar`
+          `id, no_record, nama_operator, nama_sopir,  no_kendaraan, berat_timbang_masuk, waktu_timbang_masuk, berat_timbang_keluar, waktu_timbang_keluar`
         );
       if (error) console.error("error: ", error);
       else setTimbangKeluar(data as Penimbangan[]);
@@ -55,6 +57,17 @@ export default function TimbangKeluar() {
                   </th>
                   <th className="p-4">
                     <p className="text-sm leading-none font-normal">
+                      Timbang I
+                    </p>
+                  </th>
+                  <th className="p-4">
+                    <p className="text-sm leading-none font-normal">Tanggal</p>
+                  </th>
+                  <th className="p-4">
+                    <p className="text-sm leading-none font-normal">Jam</p>
+                  </th>
+                  <th className="p-4">
+                    <p className="text-sm leading-none font-normal">
                       Timbang II
                     </p>
                   </th>
@@ -66,6 +79,9 @@ export default function TimbangKeluar() {
                   </th>
                   <th className="p-4">
                     <p className="text-sm leading-none font-normal">Operator</p>
+                  </th>
+                  <th className="p-4">
+                    <p className="text-sm leading-none font-normal">Action</p>
                   </th>
                 </tr>
               </thead>
@@ -81,39 +97,72 @@ export default function TimbangKeluar() {
                       key={item.no_record}
                     >
                       <td className="p-4">
-                        <p className="text-sm font-bold">
+                        <p className="text-xs font-bold">
                           {new Date(
                             item.waktu_timbang_keluar
                           ).toLocaleDateString("en-GB")}
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-sm">{item.no_record}</p>
+                        <p className="text-xs">{item.no_record}</p>
                       </td>
                       <td className="p-4">
-                        <p className="text-sm">{item.no_kendaraan}</p>
+                        <p className="text-xs">{item.no_kendaraan}</p>
                       </td>
                       <td className="p-4">
-                        <p className="text-sm">
+                        <p className="text-xs">{item.berat_timbang_masuk} kg</p>
+                      </td>
+                      <td className="p-4">
+                        <p className="text-xs">
+                          {new Date(
+                            item.waktu_timbang_masuk
+                          ).toLocaleDateString("en-GB")}
+                        </p>
+                      </td>
+                      <td className="p-4">
+                        <p className="text-xs">
+                          {new Date(
+                            item.waktu_timbang_masuk
+                          ).toLocaleTimeString("en-GB", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </p>
+                      </td>
+                      <td className="p-4">
+                        <p className="text-xs">
                           {item.berat_timbang_keluar} kg
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-sm">
+                        <p className="text-xs">
                           {new Date(
                             item.waktu_timbang_keluar
                           ).toLocaleDateString("en-GB")}
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-sm">
+                        <p className="text-xs">
                           {new Date(
                             item.waktu_timbang_keluar
-                          ).toLocaleTimeString("en-GB")}
+                          ).toLocaleTimeString("en-GB", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-sm">{item.nama_operator}</p>
+                        <p className="text-xs">{item.nama_operator}</p>
+                      </td>
+                      <td>
+                        {/* <Link to="/ticket-timbangan"> */}
+                          <button 
+                          onClick={() => window.open(`/ticket-timbangan/${item.id}`, "_blank")}
+                          className="text-xs font-bold text-white bg-blue-500 hover:bg-blue-200 hover:text-blue-500 rounded-lg p-2">
+                            <FaPrint className="inline mr-1" />
+                            Tiket
+                          </button>
+                        {/* </Link> */}
                       </td>
                     </tr>
                   ))}

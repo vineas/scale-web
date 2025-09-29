@@ -58,7 +58,7 @@ export default function TimbangMasuk() {
                   </th>
                   <th className="p-4">
                     <p className="text-sm leading-none font-normal">
-                      Tanggal Jam
+                      Tanggal
                     </p>
                   </th>
                   <th className="p-4">
@@ -81,37 +81,40 @@ export default function TimbangMasuk() {
                   .map((item) => (
                 <tr className="hover:bg-slate-50 border-b border-slate-200">
                   <td className="p-4">
-                    <p className="text-sm font-bold">
+                    <p className="text-xs font-bold">
                         {new Date(item.waktu_timbang_masuk).toLocaleDateString("en-GB")}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-sm">
+                    <p className="text-xs">
                         {item.no_record}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-sm">
+                    <p className="text-xs">
                         {item.no_kendaraan}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-sm">
+                    <p className="text-xs">
                         {item.berat_timbang_masuk} kg
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-sm">
+                    <p className="text-xs">
                         {new Date(item.waktu_timbang_masuk).toLocaleDateString("en-GB")}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-sm">
-                        {new Date(item.waktu_timbang_masuk).toLocaleTimeString("en-GB")}
+                    <p className="text-xs">
+                        {new Date(item.waktu_timbang_masuk).toLocaleTimeString("en-GB",{
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-sm">
+                    <p className="text-xs">
                         {item.nama_operator}
                     </p>
                   </td>

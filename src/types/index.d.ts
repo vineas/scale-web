@@ -6,8 +6,17 @@ interface Penimbangan {
     no_kendaraan: string;
     berat_timbang_masuk: number;
     berat_timbang_keluar: number;
-    waktu_timbang_masuk: Date;
-    waktu_timbang_keluar: Date;
+    waktu_timbang_masuk: string;
+    waktu_timbang_keluar: string;
+    id_barang: number;
+    id_transporter: number;
+    id_supplier_customer: number;
+}
+
+interface PenimbanganWithRelations extends Omit<Penimbangan, "id_barang" | "id_transporter" | "id_supplier_customer"> {
+    barang: Pick<Barang, "id" | "nama_barang"> | null;
+    transporter: Pick<Transporter, "id" | "nama_transporter"> | null;
+    supplier_customer: Pick<SupplierCustomer, "id" | "nama_supplier_customer"> | null;
 }
 
 interface Barang {
@@ -37,4 +46,4 @@ type WeightDisplayProps = {
     weight: number;
 };
 
-export type { Barang, Transporter, SupplierCustomer, WeightDisplayProps, Penimbangan };
+export type { Barang, Transporter, SupplierCustomer, WeightDisplayProps, Penimbangan, PenimbanganWithRelations };

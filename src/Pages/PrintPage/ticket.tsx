@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import supabase from "../../lib/db";
 import type { PenimbanganWithRelations } from "../../types";
+import { HeaderTicketComponent } from "../../components/HeaderTicket";
 
 export const TicketTimbangan = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ export const TicketTimbangan = () => {
   if (!data) return <p>Loading...</p>;
   return (
     <>
+    <HeaderTicketComponent/>
       <h1>Ticket Timbangan</h1>
       <p>No Record: {data.no_record}</p>
       <p>Nama Barang: {data?.barang?.nama_barang ?? "-"}</p>

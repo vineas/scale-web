@@ -88,8 +88,8 @@ export default function LaporanHarianPrint() {
       </div>
       <div className="flex justify-center mb-4">
         <button className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-lg" onClick={reactToPrintFn}>
-          <FaPrint className="inline mr-1" />
-          Print Disini
+          <FaPrint className="inline mr-2" />
+          Print or Export PDF
         </button>
       </div>
 

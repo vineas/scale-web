@@ -11,7 +11,7 @@ import TimbangMasuk from "./Pages/TimbangMasuk";
 import TimbangKeluar from "./Pages/TimbangKeluar";
 import { TicketTimbangan } from "./Pages/PrintPage/ticket";
 import LaporanHarian from "./Pages/Laporan/harian";
-import LaporanHarianPrint from "./components/PrintPage/LaporanHarian";
+import LaporanHarianPrint from "./Pages/PrintPage/LaporanHarian";
 
 function App() {
   return (

@@ -4,6 +4,7 @@ interface Penimbangan {
     nama_operator: string;
     nama_sopir: string;
     no_kendaraan: string;
+    no_do_po: number;
     berat_timbang_masuk: number;
     berat_timbang_keluar: number;
     waktu_timbang_masuk: string;
@@ -11,6 +12,9 @@ interface Penimbangan {
     id_barang: number;
     id_transporter: number;
     id_supplier_customer: number;
+    barang: Barang | null;
+    transporter: Transporter | null;
+    supplier_customer: SupplierCustomer | null;
 }
 
 interface PenimbanganWithRelations extends Omit<Penimbangan, "id_barang" | "id_transporter" | "id_supplier_customer"> {

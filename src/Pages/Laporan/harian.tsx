@@ -1,4 +1,3 @@
-import { FaBook, FaPrint } from "react-icons/fa";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -46,14 +45,12 @@ export default function LaporanHarian() {
                             <button
                                 onClick={() => window.open(`/harian-print`, "_blank")}
                                 className="text-xs font-bold text-white bg-blue-500 hover:bg-blue-200 hover:text-blue-500 rounded-lg p-2">
-                                <FaPrint className="inline mr-1" />
                                 Cetak Laporan
                             </button>
 
                             <button
                                 onClick={() => window.open(`/ticket-timbangan/`, "_blank")}
-                                className="mt-3 text-xs font-bold text-white bg-green-500 hover:bg-green-200 hover:text-green-500 rounded-lg p-2">
-                                <FaBook className="inline mr-1" />
+                                className="mt-3 ml-3 text-xs font-bold text-white bg-green-500 hover:bg-green-200 hover:text-green-500 rounded-lg p-2">
                                 Export Excel
                             </button>
                         </div>

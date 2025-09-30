@@ -9,9 +9,6 @@ interface Penimbangan {
     berat_timbang_keluar: number;
     waktu_timbang_masuk: string;
     waktu_timbang_keluar: string;
-    id_barang: number;
-    id_transporter: number;
-    id_supplier_customer: number;
     barang: Barang | null;
     transporter: Transporter | null;
     supplier_customer: SupplierCustomer | null;

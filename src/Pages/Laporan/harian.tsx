@@ -1,25 +1,51 @@
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useState } from "react";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import dayjs, { Dayjs } from "dayjs";
+import { FaPrint, FaBook } from "react-icons/fa";
 import * as XLSX from "xlsx";
-import { saveAs } from 'file-saver';
-import { getLaporan } from '../../hooks/LaporanHarian';
-import type { Penimbangan } from '../../types';
+import { saveAs } from "file-saver";
+import type { Penimbangan } from "../../types";
+import { getLaporan } from "../../hooks/LaporanHarian";
+
+const exportToExcel = (data: Penimbangan[], filename: string) => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Laporan");
+    const excelBuffer = XLSX.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+    });
+    const blob = new Blob([excelBuffer], {
+        type: "application/octet-stream",
+    });
+    saveAs(blob, `${filename}.xlsx`);
+};
 
 export default function LaporanHarian() {
-    const exportToExcel = (data: Penimbangan[], filename: string) => {
-        const worksheet = XLSX.utils.json_to_sheet(data);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Laporan");
-        const excelBuffer = XLSX.write(workbook, {
-            bookType: "xlsx",
-            type: "array",
-        });
-        const blob = new Blob([excelBuffer], {
-            type: "application/octet-stream",
-        });
-        saveAs(blob, `${filename}.xlsx`);
+    const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
+    const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
+
+    const handlePrint = async () => {
+        if (!startDate || !endDate) return;
+
+        const start = startDate.startOf("day").toISOString();
+        const end = endDate.endOf("day").toISOString();
+
+        // redirect ke halaman print
+        window.open(`/harian-print?start=${start}&end=${end}`, "_blank");
+    };
+
+    const handleExport = async () => {
+        if (!startDate || !endDate) return;
+
+        const start = startDate.startOf("day").toISOString();
+        const end = endDate.endOf("day").toISOString();
+
+        const data = await getLaporan(start, end);
+        exportToExcel(data as unknown as Penimbangan[], "laporan-harian");
     };
 
     return (
@@ -38,44 +64,52 @@ export default function LaporanHarian() {
                         <div></div>
                     </div>
                 </div>
-
-
                 <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 xl:grid-cols-5 text-center mt-4">
                     <div></div>
                     <div></div>
 
                     <div className="mb-4">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={['DatePicker']}>
-                                <DatePicker label="Tanggal Laporan" />
+                            <DemoContainer components={["DatePicker"]}>
+                                <DatePicker
+                                    label="Tanggal Mulai"
+                                    value={startDate}
+                                    onChange={(newValue) => setStartDate(newValue)}
+                                />
                             </DemoContainer>
                         </LocalizationProvider>
+
                         <p className="mt-2">Sampai</p>
+
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={['DatePicker']}>
-                                <DatePicker label="Tanggal Laporan" />
+                            <DemoContainer components={["DatePicker"]}>
+                                <DatePicker
+                                    label="Tanggal Selesai"
+                                    value={endDate}
+                                    onChange={(newValue) => setEndDate(newValue)}
+                                />
                             </DemoContainer>
                         </LocalizationProvider>
 
                         <div className="items-center justify-center mt-4">
                             <button
-                                onClick={() => window.open(`/harian-print`, "_blank")}
-                                className="text-xs font-bold text-white bg-blue-500 hover:bg-blue-200 hover:text-blue-500 rounded-lg p-2">
+                                onClick={handlePrint}
+                                className="text-xs font-bold text-white bg-blue-500 hover:bg-blue-200 hover:text-blue-500 rounded-lg p-2"
+                            >
+                                <FaPrint className="inline mr-1" />
                                 Cetak Laporan
                             </button>
 
                             <button
-                                onClick={async () => {
-                                    const data = await getLaporan("2025-09-01", "2025-09-30");
-                                    exportToExcel(data, "laporan_harian_timbangan");
-                                }}
-                                className="mt-3 ml-3 text-xs font-bold text-white bg-green-500 hover:bg-green-200 hover:text-green-500 rounded-lg p-2">
+                                onClick={handleExport}
+                                className="mt-3 text-xs font-bold text-white bg-green-500 hover:bg-green-200 hover:text-green-500 rounded-lg p-2"
+                            >
+                                <FaBook className="inline mr-1" />
                                 Export Excel
                             </button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );

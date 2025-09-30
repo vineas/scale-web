@@ -1,11 +1,11 @@
 import supabase from '../lib/db';
 
-export const getLaporan = async (startDate: string, endDate: string) => {
+export const getLaporan = async (start: string, end: string) => {
   const { data, error } = await supabase
     .from("penimbangan")
-    .select("*, barang(*), transporter(*), supplier_customer(*)")
-    .gte("waktu_timbang_masuk", startDate)
-    .lte("waktu_timbang_masuk", endDate);
+    .select("id, no_record, nama_sopir, no_kendaraan, berat_timbang_masuk, berat_timbang_keluar, waktu_timbang_masuk, waktu_timbang_keluar, barang(nama_barang), supplier_customer(nama_supplier_customer), no_do_po")
+    .gte("waktu_timbang_masuk", start)
+    .lte("waktu_timbang_masuk", end);
 
   if (error) throw error;
   return data;

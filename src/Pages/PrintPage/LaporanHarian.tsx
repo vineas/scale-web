@@ -4,35 +4,33 @@ import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 import type { Penimbangan } from "../../types";
 import { FaPrint } from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
 
 
 
 export default function LaporanHarianPrint() {
+  const [searchParams] = useSearchParams();
+  const start = searchParams.get("start");
+  const end = searchParams.get("end");
+
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
   const [laporan, setLaporan] = useState<Penimbangan[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getLaporan("2025-09-01", "2025-09-30"); // contoh range
-      setLaporan(data);
-      // setTimeout(() => window.print(), 500); // auto print
+      if (!start || !end) return;
+      const data = await getLaporan(start, end);
+      setLaporan(data as unknown as Penimbangan[]);
     };
     fetchData();
-  }, []);
+  }, [start, end]);
 
 
 
   return (
     <div className="p-4 ">
-      <div className="flex justify-center mb-4">
-      <button className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-lg" onClick={reactToPrintFn}>
-        <FaPrint className="inline mr-1" />
-        Print Disini
-        </button>
-      </div>
       <div ref={contentRef} className="print:p-8">
-
         <h2 className="text-2xl font-bold mb-4 text-center">Laporan Penimbangan Harian</h2>
         <table className="w-full text-sm">
           <thead>
@@ -63,9 +61,9 @@ export default function LaporanHarianPrint() {
                 <td className="text-center">{item?.supplier_customer?.nama_supplier_customer ?? "-"}</td>
                 <td className="text-center">{item.no_do_po}</td>
                 <td className="text-center">{item.berat_timbang_masuk}</td>
-                <td className="text-center">{new Date(item.waktu_timbang_masuk).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false,  })}</td>
+                <td className="text-center">{new Date(item.waktu_timbang_masuk).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false, })}</td>
                 <td className="text-center">{item.berat_timbang_keluar}</td>
-                <td className="text-center">{item.waktu_timbang_keluar ? new Date(item.waktu_timbang_keluar).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false,}) : ""}</td>
+                <td className="text-center">{item.waktu_timbang_keluar ? new Date(item.waktu_timbang_keluar).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false, }) : ""}</td>
                 <td></td>
                 <td></td>
                 <td className="text-center">{item.berat_timbang_masuk - item.berat_timbang_keluar}</td>
@@ -87,6 +85,12 @@ export default function LaporanHarianPrint() {
             {/* <th></th> */}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center mb-4">
+        <button className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-lg" onClick={reactToPrintFn}>
+          <FaPrint className="inline mr-1" />
+          Print Disini
+        </button>
       </div>
 
     </div>

@@ -60,9 +60,9 @@ export default function LaporanHarianPrint() {
                 <td className="text-center">{item?.supplier_customer?.nama_supplier_customer ?? "-"}</td>
                 <td className="text-center">{item.no_do_po}</td>
                 <td className="text-center">{item.berat_timbang_masuk}</td>
-                <td className="text-center">{new Date(item.waktu_timbang_masuk).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</td>
+                <td className="text-center">{new Date(item.waktu_timbang_masuk).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false,  })}</td>
                 <td className="text-center">{item.berat_timbang_keluar}</td>
-                <td className="text-center">{item.waktu_timbang_keluar ? new Date(item.waktu_timbang_keluar).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", }) : ""}</td>
+                <td className="text-center">{item.waktu_timbang_keluar ? new Date(item.waktu_timbang_keluar).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false,}) : ""}</td>
                 <td></td>
                 <td></td>
                 <td className="text-center">{item.berat_timbang_masuk - item.berat_timbang_keluar}</td>
@@ -74,13 +74,13 @@ export default function LaporanHarianPrint() {
             <th className="border-t border-b mt-3"></th>
             <th className="border-t border-b mt-3">Total Penimbangan</th>
             <th className="border-t border-b mt-3"></th>
-            <th className="border-t border-b mt-3">{laporan.reduce((acc,item) =>(item.berat_timbang_masuk + item.berat_timbang_masuk), 0)}</th>
+            <th className="border-t border-b mt-3">{laporan.reduce((acc, item) => acc + (item.berat_timbang_masuk || 0), 0)}</th>
             <th className="border-t border-b mt-3"></th>
-            <th className="border-t border-b mt-3">{laporan.reduce((acc,item) =>(item.berat_timbang_keluar + item.berat_timbang_keluar), 0)}</th>
+            <th className="border-t border-b mt-3">{laporan.reduce((acc, item) => acc + (item.berat_timbang_keluar || 0), 0)}</th>
             <th className="border-t border-b mt-3"></th>
             <th className="border-t border-b mt-3"></th>
             <th className="border-t border-b mt-3"></th>
-            <th className="border-t border-b mt-3">{laporan.reduce((acc,item) =>(item.berat_timbang_masuk - item.berat_timbang_keluar), 0)}</th>
+            <th className="border-t border-b mt-3">{laporan.reduce((acc, item) => acc + (item.berat_timbang_masuk - item.berat_timbang_keluar) || 0, 0)}</th>
             {/* <th></th> */}
           </tbody>
         </table>

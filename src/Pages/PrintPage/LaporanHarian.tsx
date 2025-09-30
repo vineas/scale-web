@@ -6,6 +6,7 @@ import type { Penimbangan } from "../../types";
 import { FaPrint } from "react-icons/fa";
 
 
+
 export default function LaporanHarianPrint() {
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
@@ -19,6 +20,8 @@ export default function LaporanHarianPrint() {
     };
     fetchData();
   }, []);
+
+
 
   return (
     <div className="p-4 ">

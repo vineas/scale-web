@@ -2,9 +2,25 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import * as XLSX from "xlsx";
+import { saveAs } from 'file-saver';
+import { getLaporan } from '../../hooks/LaporanHarian';
+import type { Penimbangan } from '../../types';
 
 export default function LaporanHarian() {
+    const exportToExcel = (data: Penimbangan[], filename: string) => {
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Laporan");
+        const excelBuffer = XLSX.write(workbook, {
+            bookType: "xlsx",
+            type: "array",
+        });
+        const blob = new Blob([excelBuffer], {
+            type: "application/octet-stream",
+        });
+        saveAs(blob, `${filename}.xlsx`);
+    };
 
     return (
         <div className="container">
@@ -49,14 +65,17 @@ export default function LaporanHarian() {
                             </button>
 
                             <button
-                                onClick={() => window.open(`/ticket-timbangan/`, "_blank")}
+                                onClick={async () => {
+                                    const data = await getLaporan("2025-09-01", "2025-09-30");
+                                    exportToExcel(data, "laporan_harian_timbangan");
+                                }}
                                 className="mt-3 ml-3 text-xs font-bold text-white bg-green-500 hover:bg-green-200 hover:text-green-500 rounded-lg p-2">
                                 Export Excel
                             </button>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     );

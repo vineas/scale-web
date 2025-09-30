@@ -81,6 +81,7 @@ export default function LaporanHarian() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 xl:grid-cols-5 text-center mt-4">
                     <div></div>
                     <div></div>
+                        
 
                     <div className="mb-4">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -116,7 +117,7 @@ export default function LaporanHarian() {
 
                             <button
                                 onClick={handleExport}
-                                className="mt-3 text-xs font-bold text-white bg-green-500 hover:bg-green-200 hover:text-green-500 rounded-lg p-2"
+                                className="mt-3 sm:ml-4 md:ml-4 lg:ml-4 xl:ml-0 text-xs font-bold text-white bg-green-500 hover:bg-green-200 hover:text-green-500 rounded-lg p-2"
                             >
                                 <FaBook className="inline mr-1" />
                                 Export Excel

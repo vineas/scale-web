@@ -11,7 +11,20 @@ import type { Penimbangan } from "../../types";
 import { getLaporan } from "../../hooks/LaporanHarian";
 
 const exportToExcel = (data: Penimbangan[], filename: string) => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
+    const formatted = data.map((item) => ({
+    No_Record: item.no_record,
+    Nama_Operator: item.nama_operator,
+    Nama_Sopir: item.nama_sopir,
+    No_Kendaraan: item.no_kendaraan,
+    Barang: item.barang?.nama_barang || "",
+    Supplier: item.supplier_customer?.nama_supplier_customer || "",
+    Transporter: item.transporter?.nama_transporter || "",
+    Berat_Masuk: item.berat_timbang_masuk,
+    Berat_Keluar: item.berat_timbang_keluar,
+    Waktu_Masuk: item.waktu_timbang_masuk,
+    Waktu_Keluar: item.waktu_timbang_keluar,
+  }));
+    const worksheet = XLSX.utils.json_to_sheet(formatted);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Laporan");
     const excelBuffer = XLSX.write(workbook, {

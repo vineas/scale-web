@@ -9,8 +9,9 @@ import { MasterProductsPage } from "./Pages/MasterProducts";
 import { TransporterPage } from "./Pages/Transporter";
 import TimbangMasuk from "./Pages/TimbangMasuk";
 import TimbangKeluar from "./Pages/TimbangKeluar";
-import { LaporanHarian } from "./Pages/Laporan/harian";
 import { TicketTimbangan } from "./Pages/PrintPage/ticket";
+import LaporanHarian from "./Pages/Laporan/harian";
+import LaporanHarianPrint from "./components/PrintPage/LaporanHarian";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
 
           {/* Route khusus tanpa sidebar */}
           <Route path="/ticket-timbangan/:id" element={<TicketTimbangan />} />
+          <Route path="/harian-print" element={<LaporanHarianPrint />} />
         </Routes>
       </Router>
     </>

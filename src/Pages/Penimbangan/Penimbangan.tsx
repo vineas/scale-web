@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Barang, SupplierCustomer, Transporter } from "../../types";
 import supabase from "../../lib/db";
-import { WeightDisplay } from "../../components/WeightDisplay";
+import { WeightDisplay } from "../../components/WeightDisplay/WeightDisplay";
 
 export const PenimbanganPage = () => {
   // Get data barang from supabase

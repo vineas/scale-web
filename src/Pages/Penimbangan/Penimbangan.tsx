@@ -4,9 +4,57 @@ import supabase from "../../Lib/db";
 import { WeightDisplay } from "../../Components/WeightDisplay/WeightDisplay";
 
 export const PenimbanganPage = () => {
+  // CRUD Penimbangan I
+  const [insertNoRecord, setInsertNoRecord] = useState<number | null>(null);
+  const [insertNoKendaraan, setInsertNoKendaraan] = useState("");
+  const [insertOperator, setInsertOperator] = useState("");
+  const [insertSopir, setInsertSopir] = useState("");
+  const [insertIdBarang, setInsertIdBarang] = useState<number | null>(null);
+  const [insertIdCustomer, setInsertIdCustomer] = useState<number | null>(null);
+  const [insertIdTransporter, setInsertIdTransporter] = useState<number | null>(null);
+  const [insertNoDOPO, setInsertNoDOPO] = useState("");
+  const [insertTimbangI, setInsertTimbangI] = useState<number | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent)  => {
+    e.preventDefault();
+    if (!insertIdBarang || !insertIdCustomer || !insertIdTransporter) {
+      alert("Please select Barang, Customer, and Transporter");
+      return;
+    }
+
+    const payload = {
+      no_record: insertNoRecord,
+      no_kendaraan: insertNoKendaraan,
+      nama_operator: insertOperator,
+      nama_sopir: insertSopir,
+      id_barang: insertIdBarang,
+      id_customer: insertIdCustomer,
+      id_transporter: insertIdTransporter,
+      no_do_po: insertNoDOPO,
+      berat_timbang_masuk: insertTimbangI,
+      waktu_timbang_masuk: new Date().toISOString(),
+      waktu_timbang_keluar: null,
+    }
+    console.log(payload)
+
+    const { data, error } = await supabase
+      .from("penimbangan").insert(payload).select();
+
+    if (error) {
+      console.error(error);
+      alert("Error inserting data");
+    }
+    else {
+      console.log("Inserted data: ", data);
+      window.location.reload();
+
+    }
+  }
+
+
   // Get data barang from supabase
   const [barangs, setBarangs] = useState<Barang[]>([]);
-  const [selected, setSelected] = useState("");
+  // const [selected, setSelected] = useState("");
   useEffect(() => {
     const fetchBarang = async () => {
       const { data, error } = await supabase
@@ -22,7 +70,7 @@ export const PenimbanganPage = () => {
 
   // Get data customer from supabase
   const [customers, setCustomers] = useState<SupplierCustomer[]>([]);
-  const [selectedCustomer, setSelectedCustomer] = useState("");
+  // const [selectedCustomer, setSelectedCustomer] = useState("");
   useEffect(() => {
     const fetchCustomer = async () => {
       const { data, error } = await supabase
@@ -38,7 +86,7 @@ export const PenimbanganPage = () => {
 
   // Get data transporter from supabase
   const [transporters, setTransporters] = useState<Transporter[]>([]);
-  const [selectedTransporter, setSelectedTransporter] = useState("");
+  // const [selectedTransporter, setSelectedTransporter] = useState("");
   useEffect(() => {
     const fetchTransporter = async () => {
       const { data, error } = await supabase
@@ -67,7 +115,7 @@ export const PenimbanganPage = () => {
         <div className="gap-4">
           {/* Form */}
           <div>
-            <form>
+            <form className="mt-6" onSubmit={handleSubmit}>
               {/* Button Timbang */}
               <div className="flex flex-col md:flex-row justify-center items-center md:items-start">
                 <button
@@ -80,7 +128,7 @@ export const PenimbanganPage = () => {
                   Timbang
                 </button>
               </div>
-              
+
               {/* Input Fields */}
               {/* Tipe Penimbangan, No Record, No Kendaraan */}
               <div className="grid gap-3 md:gap-6 mb-6 md:grid-cols-5 mt-5">
@@ -96,7 +144,7 @@ export const PenimbanganPage = () => {
                   <select
                     title="tipe_penimbangan"
                     // disabled={!isEditing}
-                    id="first_name"
+                    id="tipe_penimbangan"
                     className=" border border-gray-300 text-gray-900 text-sm rounded-full 
                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
                 dark:border-gray-600 dark:placeholder-gray-400  
@@ -119,10 +167,12 @@ export const PenimbanganPage = () => {
                   </label>
                   <input
                     type="number"
-                    id="record"
+                    id="no_record"
+                    value={insertNoRecord ?? ""}
+                    onChange={(e) => setInsertNoRecord(Number(e.target.value))}
                     className="rounded-lg border border-gray-300 text-gray-900 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="0001"
-                    disabled
+                    // disabled
                     required
                   />
                   <a href="#" className="text-xs text-gray-500">
@@ -140,7 +190,8 @@ export const PenimbanganPage = () => {
                   <input
                     type="text"
                     id="no_kendaraan"
-                    // disabled={!isEditing}
+                    value={insertNoKendaraan}
+                    onChange={(e) => setInsertNoKendaraan(e.target.value)}
                     className=" border-gray-300 text-gray-900 text-sm rounded-full 
               focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border 
               dark:border-gray-600 dark:placeholder-gray-400  
@@ -163,6 +214,8 @@ export const PenimbanganPage = () => {
                 <input
                   type="text"
                   id="operator"
+                  value={insertOperator}
+                  onChange={(e) => setInsertOperator(e.target.value)}
                   // disabled={!isEditing}
                   className=" border-gray-300 text-gray-900 text-sm rounded-full 
               focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border 
@@ -182,6 +235,8 @@ export const PenimbanganPage = () => {
                 <input
                   type="text"
                   id="sopir"
+                  value={insertSopir}
+                  onChange={(e) => setInsertSopir(e.target.value)}
                   // disabled={!isEditing}
                   className=" border-gray-300 text-gray-900 text-sm rounded-full 
               focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border 
@@ -202,10 +257,10 @@ export const PenimbanganPage = () => {
 
                   <select
                     title="nama_barang"
-                    id="product"
+                    id="nama_barang"
                     // disabled={!isEditing}
-                    value={selected}
-                    onChange={(e) => setSelected(e.target.value)}
+                    value={insertIdBarang ?? ""}
+                    onChange={(e) => setInsertIdBarang(Number(e.target.value))}
                     className=" border border-gray-300 text-gray-900 text-sm rounded-full 
               focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
               dark:border-gray-600 dark:placeholder-gray-400  
@@ -225,15 +280,15 @@ export const PenimbanganPage = () => {
                 {/* Nama Customer */}
                 <div className="mt-3">
                   <label
-                    htmlFor="no_record"
+                    htmlFor="customer"
                     className="block mb-2 text-sm font-medium text-gray-900 "
                   >
-                    Nama Customer
+                    Nama Supplier/Customer
                   </label>
                   <select
                     title="customer"
-                    value={selectedCustomer}
-                    onChange={(e) => setSelectedCustomer(e.target.value)}
+                    value={insertIdCustomer ?? ""}
+                    onChange={(e) => setInsertIdCustomer(Number(e.target.value))}
                     id="customer"
                     // disabled={!isEditing}
                     className=" border border-gray-300 text-gray-900 text-sm rounded-full 
@@ -260,8 +315,8 @@ export const PenimbanganPage = () => {
                   </label>
                   <select
                     title="transporter"
-                    value={selectedTransporter}
-                    onChange={(e) => setSelectedTransporter(e.target.value)}
+                    value={insertIdTransporter ?? ""}
+                    onChange={(e) => setInsertIdTransporter(Number(e.target.value))}
                     id="transporter"
                     // disabled={!isEditing}
                     className=" border border-gray-300 text-gray-900 text-sm rounded-full 
@@ -290,6 +345,8 @@ export const PenimbanganPage = () => {
                 <input
                   type="text"
                   id="no_dopo"
+                  value={insertNoDOPO}
+                  onChange={(e) => setInsertNoDOPO(e.target.value)}
                   // disabled={!isEditing}
                   className=" border-gray-300 text-gray-900 text-sm rounded-full 
               focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border 
@@ -302,13 +359,15 @@ export const PenimbanganPage = () => {
               {/* Timbang I */}
               <div className="mt-3">
                 <label
-                  htmlFor="no_dopo"
+                  htmlFor="timbang_I"
                   className="block mb-2 text-sm font-medium text-gray-900 "
                 >
                   Timbang I
                 </label>
                 <input
-                  type="number"
+                  type="text"
+                  value={insertTimbangI ?? ""}
+                  onChange={(e) => setInsertTimbangI(Number(e.target.value))}
                   placeholder="2455 kg"
                   id="timbang_I"
                   className=" border-gray-300 text-gray-900 text-sm rounded-full 
@@ -323,7 +382,7 @@ export const PenimbanganPage = () => {
               <div>
                 <button
                   type="submit"
-                  // disabled={!isEditing}
+                  // onClick={handleSubmit}
                   className="mt-4 text-white bg-blue-700 hover:bg-blue-800 
               focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold 
               rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center 
@@ -337,7 +396,7 @@ export const PenimbanganPage = () => {
           </div>
 
           {/* Table */}
-          <div className="mt-6 w-full text-left table-auto border-collapse">
+          {/* <div className="mt-6 w-full text-left table-auto border-collapse">
             <div className="relative overflow-x-auto">
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-gray-50 font-bold text-xs uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
@@ -390,7 +449,7 @@ export const PenimbanganPage = () => {
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

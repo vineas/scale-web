@@ -83,7 +83,7 @@ export const SidebarComponent = () => {
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/per-nomor-kendaraan" />}
+            component={<Link to="/laporan-per-no-kendaraan" />}
           >
             per No. Kendaraan
           </MenuItem>

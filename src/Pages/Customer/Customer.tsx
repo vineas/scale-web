@@ -90,15 +90,15 @@ export const CustomerPage = () => {
           prev.map((item) =>
             item.id === editSupplierCustomers
               ? ({
-                  ...item,
-                  kode_supplier_customer: Number(insertKodeSupplierCustomers),
-                  nama_supplier_customer: String(insertSupplierCustomers),
-                  alamat: String(insertAlamatSupplierCustomers),
-                  kota: String(insertKotaSupplierCustomers),
-                  telepon: Number(insertTeleponSupplierCustomers),
-                  facsimile: Number(insertFacsimileSupplierCustomers),
-                  pic: String(insertPICSupplierCustomers),
-                } as SupplierCustomer)
+                ...item,
+                kode_supplier_customer: Number(insertKodeSupplierCustomers),
+                nama_supplier_customer: String(insertSupplierCustomers),
+                alamat: String(insertAlamatSupplierCustomers),
+                kota: String(insertKotaSupplierCustomers),
+                telepon: Number(insertTeleponSupplierCustomers),
+                facsimile: Number(insertFacsimileSupplierCustomers),
+                pic: String(insertPICSupplierCustomers),
+              } as SupplierCustomer)
               : item
           )
         );
@@ -306,8 +306,8 @@ export const CustomerPage = () => {
                   value={
                     insertTeleponSupplierCustomers !== null
                       ? insertTeleponSupplierCustomers
-                          .toString()
-                          .padStart(9, "0")
+                        .toString()
+                        .padStart(9, "0")
                       : ""
                   }
                   onChange={(e) =>
@@ -335,8 +335,8 @@ export const CustomerPage = () => {
                   value={
                     insertFacsimileSupplierCustomers !== null
                       ? insertFacsimileSupplierCustomers
-                          .toString()
-                          .padStart(9, "0")
+                        .toString()
+                        .padStart(9, "0")
                       : ""
                   }
                   onChange={(e) =>

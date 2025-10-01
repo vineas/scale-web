@@ -12,6 +12,7 @@ import TimbangKeluar from "./Pages/TimbangKeluar/TimbangKeluar";
 import { TicketTimbangan } from "./Pages/PrintPage/TicketTimbangan";
 import LaporanHarian from "./Pages/Laporan/Harian";
 import LaporanHarianPrint from "./Pages/PrintPage/LaporanHarian";
+import LaporanNoKendaraan from "./Pages/Laporan/PerNoKendaraan";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                     <Route path="/timbang-masuk" element={<TimbangMasuk />} />
                     <Route path="/timbang-keluar" element={<TimbangKeluar />} />
                     <Route path="/laporan-harian" element={<LaporanHarian />} />
+                    <Route path="/laporan-per-no-kendaraan" element={<LaporanNoKendaraan />} />
                   </Routes>
                 </main>
               </div>

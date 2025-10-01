@@ -10,7 +10,7 @@ import { saveAs } from "file-saver";
 import type { Penimbangan } from "../../Types";
 import { getLaporan } from "../../Hooks/laporanHarian";
 
-export default function LaporanHarian() {
+export default function LaporanNoKendaraan() {
 
     const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
     const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
@@ -67,15 +67,10 @@ export default function LaporanHarian() {
             <div className="p-6 bg-white shadow-sm rounded-lg">
                 {/* Header */}
                 <div className="flex items-center justify-center">
-                    <div className="grid grid-cols-1 lg:grid-cols-7 md:grid-cols-1 xl:grid-cols-8 text-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1 xl:grid-cols-5 text-center">
                         <div></div>
                         <div></div>
-                        <div></div>
-                        <h1 className="text-2xl font-bold text-gray-900">Laporan</h1>
-                        <h1 className="text-2xl font-bold text-gray-900">Harian</h1>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <h1 className="text-2xl font-bold text-gray-900">Laporan per Nomor Kendaraan</h1>
                     </div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 xl:grid-cols-5 text-center mt-4">
@@ -105,6 +100,29 @@ export default function LaporanHarian() {
                                 />
                             </DemoContainer>
                         </LocalizationProvider>
+
+                        {/* No Kendaraan */}
+                        <div className="mt-5">
+                            <label
+                                htmlFor="no_kendaraan"
+                                className="block mb-2 text-sm font-medium text-gray-900 "
+                            >
+                                No. Kendaraan
+                            </label>
+                            <input
+                                type="text"
+                                id="no_kendaraan"
+                                // value={noKendaraan}
+                                // onChange={(e) => setNoKendaraan(e.target.value)}
+                                // disabled={!isEditing}
+                                className=" border-gray-300 text-gray-900 text-sm rounded-full 
+              focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border 
+              dark:border-gray-600 dark:placeholder-gray-400  
+              dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="B1234YN"
+                                required
+                            />
+                        </div>
 
                         <div className="items-center justify-center mt-4 ">
                             <button

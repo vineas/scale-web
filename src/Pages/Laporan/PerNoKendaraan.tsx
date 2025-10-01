@@ -8,28 +8,35 @@ import { FaPrint, FaBook } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import type { Penimbangan } from "../../Types";
-import { getLaporan } from "../../Hooks/laporanHarian";
+import { getLaporanNoKendaraan } from "../../Hooks/laporanNoKendaraan";
 
 export default function LaporanNoKendaraan() {
 
     const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
     const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
+    const [noKendaraan, setNoKendaraan] = useState("");
+    const [laporan, setLaporan] = useState([] as Penimbangan[]);
 
     const handlePrint = async () => {
         if (!startDate || !endDate) return;
-
         const start = startDate.startOf("day").toISOString();
         const end = endDate.endOf("day").toISOString();
 
-        // redirect ke halaman print
-        window.open(`/harian-print?start=${start}&end=${end}`, "_blank");
+        const data = await getLaporanNoKendaraan(start, end, noKendaraan);
+        setLaporan(data as Penimbangan[]);
+        window.open(`/no-kendaraan-print?start=${start}&end=${end}&noKendaraan=${noKendaraan}`, "_blank");
     };
+
+    // const handleFilter = async () => {
+    //     // await handleFilter();
+    //     window.open(`/no-kendaraan-print?noKendaraan=${noKendaraan}`, "_blank");
+    // };
 
     const exportToExcel = (data: Penimbangan[], filename: string) => {
         const formatted = data.map((item) => ({
             Tanggal: item.waktu_timbang_masuk,
             No_Tiket: item.no_record,
-            No_Kendaraan: item.no_kendaraan,
+            // No_Kendaraan: item.no_kendaraan,
             Barang: item.barang?.nama_barang || "",
             Supplier: item.supplier_customer?.nama_supplier_customer || "",
             Transporter: item.transporter?.nama_transporter || "",
@@ -53,13 +60,13 @@ export default function LaporanNoKendaraan() {
         saveAs(blob, `${filename}.xlsx`);
     };
     const handleExport = async () => {
-        if (!startDate || !endDate) return;
-
+         if (!startDate || !endDate) return;
         const start = startDate.startOf("day").toISOString();
         const end = endDate.endOf("day").toISOString();
 
-        const data = await getLaporan(start, end);
-        exportToExcel(data as unknown as Penimbangan[], "laporan-harian");
+        const data = await getLaporanNoKendaraan(start, end, noKendaraan);
+        setLaporan(data as Penimbangan[]);
+        exportToExcel(laporan, "laporan_timbangan_per_no_kendaraan");
     };
 
     return (
@@ -112,9 +119,8 @@ export default function LaporanNoKendaraan() {
                             <input
                                 type="text"
                                 id="no_kendaraan"
-                                // value={noKendaraan}
-                                // onChange={(e) => setNoKendaraan(e.target.value)}
-                                // disabled={!isEditing}
+                                value={noKendaraan}
+                                onChange={(e) => setNoKendaraan(e.target.value)}
                                 className=" border-gray-300 text-gray-900 text-sm rounded-full 
               focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border 
               dark:border-gray-600 dark:placeholder-gray-400  

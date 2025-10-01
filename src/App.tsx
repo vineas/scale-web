@@ -13,6 +13,7 @@ import { TicketTimbangan } from "./Pages/PrintPage/TicketTimbangan";
 import LaporanHarian from "./Pages/Laporan/Harian";
 import LaporanHarianPrint from "./Pages/PrintPage/LaporanHarian";
 import LaporanNoKendaraan from "./Pages/Laporan/PerNoKendaraan";
+import LaporanNoKendaraanPrint from "./Pages/PrintPage/LaporanNoKendaraan";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           {/* Route khusus tanpa sidebar */}
           <Route path="/ticket-timbangan/:id" element={<TicketTimbangan />} />
           <Route path="/harian-print" element={<LaporanHarianPrint />} />
+          <Route path="/no-kendaraan-print" element={<LaporanNoKendaraanPrint />} />
         </Routes>
       </Router>
     </>

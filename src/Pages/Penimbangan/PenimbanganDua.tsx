@@ -1,4 +1,4 @@
-import { WeightDisplay } from "../../components/WeightDisplay/WeightDisplay";
+import { WeightDisplay } from "../../Components/WeightDisplay/WeightDisplay";
 
 export const PenimbanganDuaPage = () => {
   return (

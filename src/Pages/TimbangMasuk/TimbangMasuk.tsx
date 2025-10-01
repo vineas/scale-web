@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import supabase from "../../lib/db";
-import type { Penimbangan } from "../../types";
+import supabase from "../../Lib/db";
+import type { Penimbangan } from "../../Types";
 
 export default function TimbangMasuk() {
     // Get data supplier/customer from supabase
@@ -81,32 +81,32 @@ export default function TimbangMasuk() {
                   .map((item) => (
                 <tr className="hover:bg-slate-50 border-b border-slate-200">
                   <td className="p-4">
-                    <p className="text-xs font-bold">
+                    <p className="text-sm text-center font-bold">
                         {new Date(item.waktu_timbang_masuk).toLocaleDateString("en-GB")}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-xs">
+                    <p className="text-sm text-center">
                         {item.no_record}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-xs">
+                    <p className="text-sm text-center">
                         {item.no_kendaraan}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-xs">
+                    <p className="text-sm text-center">
                         {item.berat_timbang_masuk} kg
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-xs">
+                    <p className="text-sm text-center">
                         {new Date(item.waktu_timbang_masuk).toLocaleDateString("en-GB")}
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-xs">
+                    <p className="text-sm text-center">
                         {new Date(item.waktu_timbang_masuk).toLocaleTimeString("en-GB",{
                           hour: "2-digit",
                           minute: "2-digit",
@@ -114,7 +114,7 @@ export default function TimbangMasuk() {
                     </p>
                   </td>
                   <td className="p-4">
-                    <p className="text-xs">
+                    <p className="text-sm text-center">
                         {item.nama_operator}
                     </p>
                   </td>

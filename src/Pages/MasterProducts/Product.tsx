@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Barang } from "../../types";
-import supabase from "../../lib/db";
+import type { Barang } from "../../Types";
+import supabase from "../../Lib/db";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import supabase from "../../lib/db";
-import type { Penimbangan } from "../../types";
+import supabase from "../../Lib/db";
+import type { Penimbangan } from "../../Types";
 import { FaPrint } from "react-icons/fa";
 // import { Link } from "react-router-dom";
 
@@ -97,30 +97,30 @@ export default function TimbangKeluar() {
                       key={item.no_record}
                     >
                       <td className="p-4">
-                        <p className="text-xs font-bold">
+                        <p className="text-xs text-center font-bold">
                           {new Date(
                             item.waktu_timbang_keluar
                           ).toLocaleDateString("en-GB")}
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">{item.no_record}</p>
+                        <p className="text-xs text-center">{item.no_record}</p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">{item.no_kendaraan}</p>
+                        <p className="text-xs text-center">{item.no_kendaraan}</p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">{item.berat_timbang_masuk} kg</p>
+                        <p className="text-xs text-center">{item.berat_timbang_masuk} kg</p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">
+                        <p className="text-xs text-center">
                           {new Date(
                             item.waktu_timbang_masuk
                           ).toLocaleDateString("en-GB")}
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">
+                        <p className="text-xs text-center">
                           {new Date(
                             item.waktu_timbang_masuk
                           ).toLocaleTimeString("en-GB", {
@@ -130,19 +130,19 @@ export default function TimbangKeluar() {
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">
+                        <p className="text-xs text-center">
                           {item.berat_timbang_keluar} kg
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">
+                        <p className="text-xs text-center">
                           {new Date(
                             item.waktu_timbang_keluar
                           ).toLocaleDateString("en-GB")}
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">
+                        <p className="text-xs text-center">
                           {new Date(
                             item.waktu_timbang_keluar
                           ).toLocaleTimeString("en-GB", {
@@ -152,7 +152,7 @@ export default function TimbangKeluar() {
                         </p>
                       </td>
                       <td className="p-4">
-                        <p className="text-xs">{item.nama_operator}</p>
+                        <p className="text-xs text-center">{item.nama_operator}</p>
                       </td>
                       <td>
                         {/* <Link to="/ticket-timbangan"> */}

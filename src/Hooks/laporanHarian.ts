@@ -1,4 +1,4 @@
-import supabase from '../lib/db';
+import supabase from '../Lib/db';
 
 export const getLaporan = async (start: string, end: string) => {
   const { data, error } = await supabase

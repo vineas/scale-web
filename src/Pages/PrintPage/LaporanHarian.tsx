@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getLaporan } from "../../hooks/LaporanHarian";
+import { getLaporan } from "../../Hooks/laporanHarian";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
-import type { Penimbangan } from "../../types";
+import type { Penimbangan } from "../../Types";
 import { FaPrint } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
 

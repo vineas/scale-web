@@ -1,4 +1,4 @@
-import type { WeightDisplayProps } from "../../types";
+import type { WeightDisplayProps } from "../../Types";
 export const WeightDisplay = ({ weight }: WeightDisplayProps) => {
   return (
     <div className="flex items-center justify-center w-80 h-32 bg-gray-900 rounded-xl shadow-lg border-2 border-gray-700">

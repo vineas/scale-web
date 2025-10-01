@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { HeaderComponent } from "./components/Header/Header";
-import { SidebarComponent } from "./components/Sidebar/Sidebar";
+import { HeaderComponent } from "./Components/Header/Header";
+import { SidebarComponent } from "./Components/Sidebar/Sidebar";
 import { CustomerPage } from "./Pages/Customer/Customer";
 import { PenimbanganPage } from "./Pages/Penimbangan/Penimbangan";
 import { PenimbanganDuaPage } from "./Pages/Penimbangan/PenimbanganDua";
 import { MasterProductsPage } from "./Pages/MasterProducts/Product";
 import { TransporterPage } from "./Pages/Transporter";
-import TimbangMasuk from "./Pages/TimbangMasuk";
-import TimbangKeluar from "./Pages/TimbangKeluar";
+import TimbangMasuk from "./Pages/TimbangMasuk/TimbangMasuk";
+import TimbangKeluar from "./Pages/TimbangKeluar/TimbangKeluar";
 import { TicketTimbangan } from "./Pages/PrintPage/TicketTimbangan";
 import LaporanHarian from "./Pages/Laporan/Harian";
 import LaporanHarianPrint from "./Pages/PrintPage/LaporanHarian";

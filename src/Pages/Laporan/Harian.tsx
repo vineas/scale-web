@@ -7,8 +7,8 @@ import dayjs, { Dayjs } from "dayjs";
 import { FaPrint, FaBook } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-import type { Penimbangan } from "../../types";
-import { getLaporan } from "../../hooks/LaporanHarian";
+import type { Penimbangan } from "../../Types";
+import { getLaporan } from "../../Hooks/laporanHarian";
 
 const exportToExcel = (data: Penimbangan[], filename: string) => {
     const formatted = data.map((item) => ({

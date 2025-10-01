@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import supabase from "../../lib/db";
-import type { PenimbanganWithRelations } from "../../types";
-import { HeaderTicketComponent } from "../../components/HeaderTicket/HeaderTicket";
+import supabase from "../../Lib/db";
+import type { PenimbanganWithRelations } from "../../Types";
+import { HeaderTicketComponent } from "../../Components/Header/HeaderTicket";
 
 export const TicketTimbangan = () => {
   const { id } = useParams();

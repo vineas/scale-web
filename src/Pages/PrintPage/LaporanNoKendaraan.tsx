@@ -44,7 +44,7 @@ export default function LaporanNoKendaraanPrint() {
             ) : laporan.length > 0 ? (
                 <div>
                     <div ref={contentRef} className="print:p-8">
-                        <h2 className="text-2xl font-bold mb-4 text-center">Laporan Penimbangan Harian</h2>
+                        <h2 className="text-2xl font-bold mb-4 text-center">Laporan Penimbangan per No Kendaraan</h2>
                         <div className="flex">
                             <p className="text-xs">Periode: </p>
                             <p className="text-xs ml-1">{start ? new Date(start).toLocaleDateString("id-ID") : ""}  s/d {" "}

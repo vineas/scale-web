@@ -8,13 +8,13 @@ import { FaPrint, FaBook } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import type { Penimbangan } from "../../Types";
-import { getLaporanNoKendaraan } from "../../Hooks/laporanNoKendaraan";
+import { getLaporanNoDoPo } from "../../Hooks/laporanNoDoPo";
 
-export default function LaporanNoKendaraan() {
+export default function LaporanNoDoPo() {
 
     const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
     const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
-    const [noKendaraan, setNoKendaraan] = useState("");
+    const [noDoPo, setNoDoPo] = useState("");
     const [laporan, setLaporan] = useState([] as Penimbangan[]);
 
     const handlePrint = async () => {
@@ -22,21 +22,16 @@ export default function LaporanNoKendaraan() {
         const start = startDate.startOf("day").toISOString();
         const end = endDate.endOf("day").toISOString();
 
-        const data = await getLaporanNoKendaraan(start, end, noKendaraan);
+        const data = await getLaporanNoDoPo(start, end, noDoPo);
         setLaporan(data as Penimbangan[]);
-        window.open(`/no-kendaraan-print?start=${start}&end=${end}&noKendaraan=${noKendaraan}`, "_blank");
+        window.open(`/no-do-po-print?start=${start}&end=${end}&noDoPo=${noDoPo}`, "_blank");
     };
-
-    // const handleFilter = async () => {
-    //     // await handleFilter();
-    //     window.open(`/no-kendaraan-print?noKendaraan=${noKendaraan}`, "_blank");
-    // };
 
     const exportToExcel = (data: Penimbangan[], filename: string) => {
         const formatted = data.map((item) => ({
             Tanggal: item.waktu_timbang_masuk,
             No_Tiket: item.no_record,
-            // No_Kendaraan: item.no_kendaraan,
+            No_Kendaraan: item.no_kendaraan,
             Barang: item.barang?.nama_barang || "",
             Supplier: item.supplier_customer?.nama_supplier_customer || "",
             Transporter: item.transporter?.nama_transporter || "",
@@ -64,9 +59,9 @@ export default function LaporanNoKendaraan() {
         const start = startDate.startOf("day").toISOString();
         const end = endDate.endOf("day").toISOString();
 
-        const data = await getLaporanNoKendaraan(start, end, noKendaraan);
+        const data = await getLaporanNoDoPo(start, end, noDoPo);
         setLaporan(data as Penimbangan[]);
-        exportToExcel(laporan, "laporan_timbangan_per_no_kendaraan");
+        exportToExcel(laporan, "laporan_timbangan_per_no_do_po");
     };
 
     return (
@@ -77,7 +72,7 @@ export default function LaporanNoKendaraan() {
                     <div className="grid grid-cols-1 lg:grid-cols-1 md:grid-cols-1 xl:grid-cols-5 text-center">
                         <div></div>
                         <div></div>
-                        <h1 className="text-2xl font-bold text-gray-900">Laporan per Nomor Kendaraan</h1>
+                        <h1 className="text-2xl font-bold text-gray-900">Laporan per Nomor DO/PO</h1>
                     </div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1 xl:grid-cols-5 text-center mt-4">
@@ -113,18 +108,18 @@ export default function LaporanNoKendaraan() {
                                     htmlFor="no_kendaraan"
                                     className="block mb-2 text-sm font-medium text-gray-900 "
                                 >
-                                    No. Kendaraan
+                                    No. DO/PO
                                 </label>
                                 <input
                                     type="text"
-                                    id="no_kendaraan"
-                                    value={noKendaraan}
-                                    onChange={(e) => setNoKendaraan(e.target.value)}
+                                    id="no_do_po"
+                                    value={noDoPo}
+                                    onChange={(e) => setNoDoPo(e.target.value)}
                                     className=" border-gray-300 text-gray-900 text-sm rounded-full 
               focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border 
               dark:border-gray-600 dark:placeholder-gray-400  
               dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="B1234YN"
+                                    placeholder="Masukkan No. DO/PO"
                                     required
                                 />
                             </div>
@@ -132,18 +127,18 @@ export default function LaporanNoKendaraan() {
                             <div className="items-center justify-center mt-4 ">
                                 <button
                                     onClick={handlePrint}
-                                    disabled={!noKendaraan}
+                                    disabled={!noDoPo}
                                     className={`text-xs font-bold rounded-lg p-2 
-                                    ${!noKendaraan ? "bg-gray-400 cursor-not-allowed": "text-white bg-blue-500 hover:bg-blue-200 hover:text-blue-500"}`}>
+                                    ${!noDoPo ? "bg-gray-400 cursor-not-allowed": "text-white bg-blue-500 hover:bg-blue-200 hover:text-blue-500"}`}>
                                     <FaPrint className="inline mr-1" />
                                     Cetak Laporan
                                 </button>
 
                                 <button
-                                    disabled={!noKendaraan} 
+                                    disabled={!noDoPo} 
                                     onClick={handleExport}
                                     className={`mt-3 sm:ml-4 md:ml-4 lg:ml-4 xl:ml-0 text-xs font-bold rounded-lg p-2
-                                    ${!noKendaraan ? "bg-gray-400 cursor-not-allowed": "text-white bg-green-500 hover:bg-green-200 hover:text-green-500"}`}>
+                                    ${!noDoPo ? "bg-gray-400 cursor-not-allowed": "text-white bg-green-500 hover:bg-green-200 hover:text-green-500"}`}>
                                     <FaBook className="inline mr-1" />
                                     Export Excel
                                 </button>

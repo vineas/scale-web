@@ -89,31 +89,31 @@ export const SidebarComponent = () => {
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/per-product" />}
+            component={<Link to="/laporan-per-barang" />}
           >
             per Product
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/per-customer" />}
+            component={<Link to="/laporan-per-supplier-customer" />}
           >
             per Customer/Suplier
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/per-nomor-do-po" />}
+            component={<Link to="/laporan-per-nomor-do-po" />}
           >
             per Nomor DO/PO
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/per-transporter" />}
+            component={<Link to="/laporan-per-transporter" />}
           >
             per Transporter
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/daftar-product" />}
+            component={<Link to="/daftar-barang" />}
           >
             Daftar Product
           </MenuItem>
@@ -125,7 +125,7 @@ export const SidebarComponent = () => {
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/daftar-transporter" />}
+            component={<Link to="/daftar-transporter" />}
           >
             Daftar Transporter
           </MenuItem>

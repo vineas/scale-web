@@ -14,6 +14,18 @@ import LaporanHarian from "./Pages/Laporan/Harian";
 import LaporanHarianPrint from "./Pages/PrintPage/LaporanHarian";
 import LaporanNoKendaraan from "./Pages/Laporan/PerNoKendaraan";
 import LaporanNoKendaraanPrint from "./Pages/PrintPage/LaporanNoKendaraan";
+import LaporanBarang from "./Pages/Laporan/PerBarang";
+import LaporanPerBarangPrint from "./Pages/PrintPage/LaporanPerBarang";
+import LaporanSupplierCustomer from "./Pages/Laporan/PerSupplierCustomer";
+import LaporanPerSupplierCustomerPrint from "./Pages/PrintPage/LaporanPerSupplierCustomer";
+import LaporanTransporter from "./Pages/Laporan/PerTransporter";
+import LaporanPerTransporterPrint from "./Pages/PrintPage/LaporanPerTransporter";
+import LaporanNoDoPo from "./Pages/Laporan/PerDoPo";
+import LaporanNoDoPoPrint from "./Pages/PrintPage/LaporanNoDoPo";
+import DaftarBarang from "./Pages/Laporan/DaftarBarang";
+import DaftarBarangPrint from "./Pages/PrintPage/DaftarBarang";
+import DaftarTransporter from "./Pages/Laporan/DaftarTransporter";
+import DaftarTransporterPrint from "./Pages/PrintPage/DaftarTransporter";
 
 function App() {
   return (
@@ -44,6 +56,12 @@ function App() {
                     <Route path="/timbang-keluar" element={<TimbangKeluar />} />
                     <Route path="/laporan-harian" element={<LaporanHarian />} />
                     <Route path="/laporan-per-no-kendaraan" element={<LaporanNoKendaraan />} />
+                    <Route path="/laporan-per-barang" element={<LaporanBarang />} />
+                    <Route path="/laporan-per-supplier-customer" element={<LaporanSupplierCustomer />} />
+                    <Route path="/laporan-per-transporter" element={<LaporanTransporter />} />
+                    <Route path="/laporan-per-nomor-do-po" element={<LaporanNoDoPo />} />
+                    <Route path="/daftar-barang" element={<DaftarBarang />} />
+                    <Route path="/daftar-transporter" element={<DaftarTransporter />} />
                   </Routes>
                 </main>
               </div>
@@ -54,6 +72,12 @@ function App() {
           <Route path="/ticket-timbangan/:id" element={<TicketTimbangan />} />
           <Route path="/harian-print" element={<LaporanHarianPrint />} />
           <Route path="/no-kendaraan-print" element={<LaporanNoKendaraanPrint />} />
+          <Route path="/barang-print" element={<LaporanPerBarangPrint />} />
+          <Route path="/supplier-customer-print" element={<LaporanPerSupplierCustomerPrint />} />
+          <Route path="/transporter-print" element={<LaporanPerTransporterPrint />} />
+          <Route path="/no-do-po-print" element={<LaporanNoDoPoPrint />} />
+          <Route path="/daftar-barang-print" element={<DaftarBarangPrint />} />
+          <Route path="/daftar-transporter-print" element={<DaftarTransporterPrint />} />
         </Routes>
       </Router>
     </>

@@ -1,3 +1,15 @@
+interface Company{
+    id: number;
+    company_name: string;
+    address: string;
+    city: string;
+    province: string;
+    telephone: number;
+    facsimile: string;
+    maintenance: string;
+    url: string;
+}
+
 interface Penimbangan {
     id: number;
     no_record: string;
@@ -47,4 +59,4 @@ type WeightDisplayProps = {
     weight: number;
 };
 
-export type { Barang, Transporter, SupplierCustomer, WeightDisplayProps, Penimbangan, PenimbanganWithRelations };
+export type { Barang, Transporter, SupplierCustomer, WeightDisplayProps, Penimbangan, PenimbanganWithRelations, Company };

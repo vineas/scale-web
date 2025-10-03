@@ -5,6 +5,7 @@ import type { Penimbangan } from "../../Types";
 import { FaPrint } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
 import { getLaporanBarang } from "../../Hooks/laporanPerBarang";
+import { HeaderReportComponent } from "../../Components/Header/HeaderReport";
 
 
 
@@ -44,6 +45,9 @@ export default function LaporanPerBarangPrint() {
             ) : laporan.length > 0 ? (
                 <div>
                     <div ref={contentRef} className="print:p-8">
+                        <div>
+                            <HeaderReportComponent />
+                        </div>
                         <h2 className="text-2xl font-bold mb-4 text-center">Laporan Penimbangan per Barang</h2>
                         <div className="flex">
                             <p className="text-xs">Periode: </p>
@@ -57,6 +61,7 @@ export default function LaporanPerBarangPrint() {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="bg-gray-200 border">
+                                    <th className="border">No</th>
                                     <th className="border">Tanggal</th>
                                     <th className="border">No Ticket</th>
                                     <th className="border">No Kendaraan</th>
@@ -76,10 +81,10 @@ export default function LaporanPerBarangPrint() {
                             <tbody>
                                 {laporan.map((item, idx) => (
                                     <tr key={idx} className="">
+                                        <td className="text-center">{idx + 1}</td>
                                         <td className="text-center">{new Date(item.waktu_timbang_masuk).toLocaleDateString()}</td>
-                                        <td className="text-center">{item.no_record}</td>
+                                        <td className="text-center">{String(item.no_record).padStart(4,"0")}</td>
                                         <td className="text-center">{item.no_kendaraan}</td>
-                                        {/* <td className="text-center">{item?.barang?.nama_barang}</td> */}
                                         <td className="text-center">{item?.supplier_customer?.nama_supplier_customer ?? "-"}</td>
                                         <td className="text-center">{item.no_do_po}</td>
                                         <td className="text-center">{item.berat_timbang_masuk}</td>
@@ -91,6 +96,7 @@ export default function LaporanPerBarangPrint() {
                                         <td className="text-center">{item.berat_timbang_masuk - item.berat_timbang_keluar}</td>
                                     </tr>
                                 ))}
+                                <th className="border-t border-b mt-3"></th>
                                 <th className="border-t border-b mt-3"></th>
                                 <th className="border-t border-b mt-3"></th>
                                 <th className="border-t border-b mt-3"></th>

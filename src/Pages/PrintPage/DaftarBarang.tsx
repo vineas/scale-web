@@ -4,6 +4,7 @@ import { useRef } from "react";
 import type { Barang, } from "../../Types";
 import { FaPrint } from "react-icons/fa";
 import { getDaftarBarang } from "../../Hooks/daftarBarang";
+import { HeaderReportComponent } from "../../Components/Header/HeaderReport";
 
 
 
@@ -30,10 +31,14 @@ export default function DaftarBarangPrint() {
       ) : laporan.length > 0 ? (
         <div>
           <div ref={contentRef} className="print:p-8">
+            <div>
+              <HeaderReportComponent />
+            </div>
             <h2 className="text-2xl font-bold mb-4 text-center">Daftar Barang</h2>
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-200 border">
+                  <th className="border">No</th>
                   <th className="border">Kode Barang</th>
                   <th className="border">Nama Barang</th>
                 </tr>
@@ -42,7 +47,8 @@ export default function DaftarBarangPrint() {
                 {laporan.map((item, idx) => (
                   <tr key={idx} className="">
                     {/* <td className="text-center">{new Date(item.waktu_timbang_masuk).toLocaleDateString()}</td> */}
-                    <td className="text-center">{item.kode_barang}</td>
+                    <td className="text-center">{idx + 1}</td>
+                    <td className="text-center">{String(item.kode_barang).padStart(4, "0")}</td>
                     <td className="text-center">{item.nama_barang}</td>
                   </tr>
                 ))}

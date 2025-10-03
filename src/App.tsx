@@ -26,6 +26,8 @@ import DaftarBarang from "./Pages/Laporan/DaftarBarang";
 import DaftarBarangPrint from "./Pages/PrintPage/DaftarBarang";
 import DaftarTransporter from "./Pages/Laporan/DaftarTransporter";
 import DaftarTransporterPrint from "./Pages/PrintPage/DaftarTransporter";
+import DaftarSupplierCustomer from "./Pages/Laporan/DaftarSupplierCustomer";
+import DaftarSupplierCustomerPrint from "./Pages/PrintPage/DaftarSupplierCustomer";
 
 function App() {
   return (
@@ -61,6 +63,7 @@ function App() {
                     <Route path="/laporan-per-transporter" element={<LaporanTransporter />} />
                     <Route path="/laporan-per-nomor-do-po" element={<LaporanNoDoPo />} />
                     <Route path="/daftar-barang" element={<DaftarBarang />} />
+                    <Route path="/daftar-supplier-customer" element={<DaftarSupplierCustomer />} />
                     <Route path="/daftar-transporter" element={<DaftarTransporter />} />
                   </Routes>
                 </main>
@@ -78,6 +81,7 @@ function App() {
           <Route path="/no-do-po-print" element={<LaporanNoDoPoPrint />} />
           <Route path="/daftar-barang-print" element={<DaftarBarangPrint />} />
           <Route path="/daftar-transporter-print" element={<DaftarTransporterPrint />} />
+          <Route path="/daftar-supplier-customer-print" element={<DaftarSupplierCustomerPrint />} />
         </Routes>
       </Router>
     </>

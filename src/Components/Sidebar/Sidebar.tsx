@@ -119,7 +119,7 @@ export const SidebarComponent = () => {
           </MenuItem>
           <MenuItem
             icon={<FaListAlt />}
-            component={<Link to="/laporan/daftar-customer" />}
+            component={<Link to="/daftar-supplier-customer" />}
           >
             Daftar Customer/Suplier
           </MenuItem>

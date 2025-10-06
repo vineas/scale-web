@@ -48,7 +48,7 @@ export default function LaporanNoDoPoPrint() {
                         <div>
                             <HeaderReportComponent />
                         </div>
-                        <h2 className="text-2xl font-bold mb-4 text-center">Laporan Penimbangan per No Kendaraan</h2>
+                        <h2 className="text-2xl font-bold mb-4 text-center">Laporan Penimbangan per No DO/PO</h2>
                         <div className="flex">
                             <p className="text-xs">Periode: </p>
                             <p className="text-xs ml-1">{start ? new Date(start).toLocaleDateString("id-ID") : ""}  s/d {" "}
